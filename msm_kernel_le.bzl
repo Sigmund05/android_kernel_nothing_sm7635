@@ -1,6 +1,6 @@
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 load(
-    "//build:msm_kernel_extensions.bzl",
+    ":msm_kernel_extensions.bzl",
     "define_extras",
     "get_build_config_fragments",
     "get_dtb_list",
@@ -204,7 +204,7 @@ def _define_kernel_dist(target, msm_target, variant):
         msm_dist_targets += [
             ":{}_dummy_files".format(le_target),
             ":{}_avb_sign_boot_image".format(target),
-            "//msm-kernel:{}_super_image".format(le_target + "_gki"),
+            ":{}_super_image".format(le_target + "_gki"),
         ]
 
     copy_to_dist_dir(

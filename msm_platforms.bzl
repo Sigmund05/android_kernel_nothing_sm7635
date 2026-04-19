@@ -1,5 +1,5 @@
 # keep sorted
-load("//build:msm_kernel_extensions.bzl", "define_top_level_rules")
+load(":msm_kernel_extensions.bzl", "define_top_level_rules")
 load(":anorak.bzl", "define_anorak")
 load(":autoghgvm.bzl", "define_autoghgvm")
 load(":autoghgvm_lxc.bzl", "define_autoghgvm_lxc")
