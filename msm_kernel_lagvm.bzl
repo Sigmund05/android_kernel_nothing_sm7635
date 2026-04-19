@@ -54,7 +54,7 @@ def _define_build_config(
         name = "{}_build_config_bazel".format(target),
         out = "build.config.msm.{}.generated".format(target),
         content = [
-            'KERNEL_DIR="msm-kernel"',
+            'KERNEL_DIR="vendor/qcom/kernel"',
             "VARIANTS=({})".format(" ".join([v.replace("-", "_") for v in lxc_variants])),
             "MSM_ARCH={}".format(msm_target.replace("-", "_")),
             "VARIANT={}".format(variant.replace("-", "_")),
