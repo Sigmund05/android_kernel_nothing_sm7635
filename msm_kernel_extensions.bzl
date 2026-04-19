@@ -38,6 +38,3 @@ def get_dtstree(target, target_arch = "arm64"):
 
 def get_vendor_ramdisk_binaries(target, flavor = None):
     return None
-
-def get_gki_ramdisk_prebuilt_binary():
-    return None

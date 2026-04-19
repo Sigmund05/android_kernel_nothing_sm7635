@@ -6,7 +6,6 @@ load(
     "get_dtb_list",
     "get_dtbo_list",
     "get_dtstree",
-    "get_gki_ramdisk_prebuilt_binary",
     "get_vendor_ramdisk_binaries",
 )
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
@@ -262,7 +261,6 @@ def _define_image_build(
         vendor_dlkm_modules_blocklist = "modules.vendor_blocklist.msm.{}".format(msm_target),
         dtbo_srcs = [":{}/".format(target) + d for d in dtbo_list] if dtbo_list else None,
         vendor_ramdisk_binaries = vendor_ramdisk_binaries,
-        gki_ramdisk_prebuilt_binary = None,
         boot_image_outs = ["boot.img", "dtb.img", "vendor_boot.img"],
         deps = [
             "modules.list.msm.{}".format(msm_target),

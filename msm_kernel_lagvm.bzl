@@ -19,7 +19,6 @@ load(
     "get_dtb_list",
     "get_dtbo_list",
     "get_dtstree",
-    "get_gki_ramdisk_prebuilt_binary",
     "get_vendor_ramdisk_binaries",
 )
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
@@ -182,7 +181,6 @@ def _define_image_build(
         boot_image_outs = None,
         dtbo_list = [],
         vendor_ramdisk_binaries = None,
-        gki_ramdisk_prebuilt_binary = None,
         in_tree_module_list = []):
     """Creates a `kernel_images` target which will generate bootable device images
 
@@ -230,7 +228,6 @@ def _define_image_build(
         vendor_dlkm_modules_blocklist = "modules.vendor_blocklist.msm.{}".format(msm_target),
         dtbo_srcs = [":{}/".format(target) + d for d in dtbo_list] if dtbo_list else None,
         vendor_ramdisk_binaries = vendor_ramdisk_binaries,
-        gki_ramdisk_prebuilt_binary = gki_ramdisk_prebuilt_binary,
         boot_image_outs = boot_image_outs,
         deps = [
             "modules.list.msm.{}".format(msm_target),
@@ -372,7 +369,6 @@ def define_msm_lagvm(
     dtbo_list = get_dtbo_list(lxc_target)
     dtstree = get_dtstree(lxc_target)
     vendor_ramdisk_binaries = get_vendor_ramdisk_binaries(target)
-    gki_ramdisk_prebuilt_binary = get_gki_ramdisk_prebuilt_binary()
     build_config_fragments = get_build_config_fragments(lxc_target)
 
     _define_build_config(
