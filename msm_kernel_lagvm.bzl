@@ -361,7 +361,7 @@ def define_msm_lagvm(
     target = msm_target.replace("_", "-") + "_" + variant.replace("_", "-")
 
     # Always set base_kernel to kernel_aarch64
-    base_kernel = "//common:kernel_aarch64"
+    base_kernel = "//vendor/qcom/kernel:kernel_aarch64"
 
     lxc_target = msm_target.split("-")[0]
 
