@@ -20,8 +20,6 @@ load(
     "kernel_modules_install",
     "kernel_uapi_headers_cc_library",
     "merged_kernel_uapi_headers",
-    "super_image",
-    "unsparsed_image",
 )
 load(":avb_boot_img.bzl", "avb_sign_boot_image")
 load(":dpm_image.bzl", "define_dpm_image")
@@ -298,18 +296,6 @@ def _define_image_build(
         output_group = "vendor_dlkm.img",
     )
 
-    super_image(
-        name = "{}_super_image".format(target),
-        system_dlkm_image = ":{}_system_dlkm_image_file".format(target),
-        vendor_dlkm_image = ":{}_vendor_dlkm_image_file".format(target),
-    )
-
-    unsparsed_image(
-        name = "{}_unsparsed_image".format(target),
-        src = "{}_super_image".format(target),
-        out = "super_unsparsed.img",
-    )
-
 def _define_kernel_dist(
         target,
         msm_target,
@@ -355,8 +341,6 @@ def _define_kernel_dist(
         "{}_headers".format(base_kernel),
         ":{}".format(target),
         ":{}_images".format(target),
-        ":{}_super_image".format(target),
-        ":{}_unsparsed_image".format(target),
         ":{}_merged_kernel_uapi_headers".format(target),
         ":{}_build_config".format(target),
         ":{}_system_dlkm_module_blocklist".format(target),

@@ -19,8 +19,6 @@ load(
     "kernel_modules_install",
     "kernel_uapi_headers_cc_library",
     "merged_kernel_uapi_headers",
-    "super_image",
-    "unsparsed_image",
 )
 load(":allyes_images.bzl", "gen_allyes_files")
 load(":image_opts.bzl", "boot_image_opts")
@@ -195,15 +193,10 @@ def _define_kernel_dist(target, msm_target, variant):
         msm_dist_targets += [
             ":verity_key",
         ]
-    elif target.split("_")[0] == "neo-le":
-        msm_dist_targets += [
-            ":{}_super_image".format(target),
-        ]
-    else:
+    elif target.split("_")[0] != "neo-le":
         msm_dist_targets += [
             ":{}_dummy_files".format(le_target),
             ":{}_avb_sign_boot_image".format(target),
-            ":{}_super_image".format(le_target + "_gki"),
         ]
 
     copy_to_dist_dir(
@@ -303,16 +296,6 @@ def _define_image_build(
         name = "{}_vendor_dlkm_image_file".format(target),
         srcs = [":{}_images".format(target)],
         output_group = "vendor_dlkm.img",
-    )
-    super_image(
-        name = "{}_super_image".format(target),
-        system_dlkm_image = ":{}_system_dlkm_image_file".format(target),
-        vendor_dlkm_image = ":{}_vendor_dlkm_image_file".format(target),
-    )
-    unsparsed_image(
-        name = "{}_unsparsed_image".format(target),
-        src = "{}_super_image".format(target),
-        out = "super_unsparsed.img",
     )
 
 def define_msm_le(
